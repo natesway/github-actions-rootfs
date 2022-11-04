@@ -1,14 +1,17 @@
-  buildMac:
-    runs-on: macos-latest
+name: rootfs
+on: [ push, pull_request, workflow_dispatch ]
 
+jobs:
+  build:
+    runs-on: macos-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - run: |
-       brew install rsync
-       mkdir ~/rootfs
-       sudo rsync -av --progress / /home/runner/rootfs --exclude /home/runner/rootfs
-       sudo chown runner ~/rootfs
+         brew install rsync
+         mkdir ~/rootfs
+         sudo rsync -av --progress / /home/runner/rootfs --exclude /home/runner/rootfs
+         sudo chown runner ~/rootfs
       - name: capture build artifacts
         uses: actions/upload-artifact@v2
         with:
