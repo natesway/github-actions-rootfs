@@ -15,7 +15,8 @@ jobs:
         run: |
          sudo apt update
          mkdir ~/rootfs
-         sudo cp -r / ~/rootfs
+         sudo apt install rsync
+         sudo rsync -av --progress / /home/runner/rootfs --exclude /home/runner/rootfs
          sudo chown runner ~/rootfs
       - name: capture build artifacts
         uses: actions/upload-artifact@v2
