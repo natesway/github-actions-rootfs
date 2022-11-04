@@ -14,9 +14,11 @@ jobs:
         id: latest_tag
         run: |
          sudo apt update
-         cd /
+         mkdir ~/rootfs
+         sudo cp -r / ~/rootfs
+         sudo chown runner ~/rootfs
       - name: capture build artifacts
         uses: actions/upload-artifact@v2
         with:
          name: ubuntu-rootfs
-         path: /
+         path: ~/rootfs
