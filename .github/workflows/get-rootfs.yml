@@ -1,0 +1,22 @@
+name: rootfs
+on: [ push, pull_request, workflow_dispatch ]
+
+jobs:
+  build:
+    name: get rootfs
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: "install nothing"
+        id: latest_tag
+        run: |
+         sudo apt update
+         cd /
+      - name: capture build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+         name: ubuntu-rootfs
+         path: /
