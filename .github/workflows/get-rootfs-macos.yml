@@ -10,7 +10,8 @@ jobs:
       - run: |
          brew install rsync
          mkdir ~/rootfs
-         sudo rsync -av --progress / /home/runner/rootfs --exclude /home/runner/rootfs
+         ls /
+         sudo rsync -av --progress / ~/rootfs --exclude ~/runner/rootfs
          sudo chown runner ~/rootfs
       - name: capture build artifacts
         uses: actions/upload-artifact@v2
